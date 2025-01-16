@@ -6,11 +6,10 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/16 11:23:13 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:22:37 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
 
 int	push_swap(int argc, char **argv)
@@ -50,12 +49,13 @@ int	push_swap(int argc, char **argv)
 	return (0);
 }
 
+
 int main(int argc, char **argv)
 {
-/*	if (!error_handler(argc, argv))
-		return (42);*/
-	if (!push_swap(argc, argv))
-		return (42);
+	if (error_handler(argc, argv) == -1)
+		return (-1);
+	/*if (push_swap(argc, argv) == -1)
+		return (-1);*/
 	return (0);
 }
 

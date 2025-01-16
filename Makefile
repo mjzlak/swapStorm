@@ -6,7 +6,7 @@
 #    By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 08:27:01 by mjzlak            #+#    #+#              #
-#    Updated: 2025/01/16 11:30:59 by mloeffer         ###   ########.fr        #
+#    Updated: 2025/01/16 13:25:04 by mloeffer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS = main.c \
        operations.c \
+	   error_handler.c \
 	   ft_split_to_list.c
 
 OBJS = $(SRCS:.c=.o)

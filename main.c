@@ -3,94 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjzlak <mjzlak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/16 08:53:55 by mjzlak           ###   ########.fr       */
+/*   Updated: 2025/01/16 11:23:13 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 
-void sort_stack(t_stack *stack_a, t_stack *stack_b)
+int	push_swap(int argc, char **argv)
 {
-    // Choisir un algorithme de tri performant
-    // Générer les instructions
-}
+	t_list	*a;
+	t_list	*b;
+	int		*value;
 
-int is_sorted(t_stack *stack_a)
-{
-    int i;
-
-    i = 0;
-    while (i < stack_a->size - 1)
-    {
-        if (stack_a->stack[i] > stack_a->stack[i + 1])
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
-int error_handler(int ac, char **av)
-{
-    int i;
-    int j;
-
-    i = 0;
-    if (ac < 2)
-        return (-1);
-    // Check for invalid characters
-    while (av[++i])
-    {
-        if (!ft_isdigit(av[i]))
-            return (-1);
-    }
-    // Check for duplicates
-    i = 0;
-    j = 0;
-    while (av[i++])
-    {
-        while (av[j++])
-        {
-            if (i != j && ft_atoi(av[i]) == ft_atoi(av[j]))
-                return (-1);
-        }
-        j = 0;
-    }
-    // Check for integer overflow
-    i = 0;
-    while (av[i++])
-    {
-        if (ft_atoi(av[i]) > INT_MAX || ft_atoi(av[i]) < INT_MIN)
-            return (-1);
-    }
-    return (0);
+	a = NULL;
+	b = NULL;
+	value = NULL;
+	if (argc == 1)
+		ft_split_to_list(argv[1], ' ', a);
+	else
+	{
+		while (--argc)
+		{
+			*value = ft_atoi(argv[argc]);
+			ft_lstadd_back(&a, ft_lstnew(value));
+		}
+		/*while (--argc)
+			ft_lstadd_front(&a, ft_lstnew(ft_atoi(argv[argc])));*/
+	}
+	//REMOVE
+	int i = 0;
+	t_list *current = a;
+	while (current)
+	{
+		printf("a[%d] = %d\n", i, *(int *)(current->content));
+		current = current->next;
+		i++;
+	}
+	// 1. Parsing
+	// 2. Initialiser et remplir la pile a
+	// 3. Appeler la logique de tri
+	// 4. Afficher les instructions
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
-    t_stack stack_a;
-    t_stack stack_b;
-
-    if (error_handler(argc, argv) == -1)
-        return (-1);
-    // 1. Parsing
-    // 2. Initialiser et remplir la pile a
-    while (argv[i])
-    {
-        stack_a.stack[i] = ft_atoi(argv[i]);
-        i++;
-    }
-    stack_a.size = i;
-    if (is_sorted(&stack_a))
-        return (0);
-    else
-        sort_stack(&stack_a, &stack_b);
-    // 3. Appeler la logique de tri
-    // 4. Afficher les instructions
-    return (0);
+/*	if (!error_handler(argc, argv))
+		return (42);*/
+	if (!push_swap(argc, argv))
+		return (42);
+	return (0);
 }
 
 /*
@@ -98,6 +64,8 @@ Voici un plan succinct :
 
 1. Parsing & validation  
    • Vérifier les arguments (valeurs, doublons, dépassement d’entier).  
+   // "4 66 554 47 8 1 4"
+   // 4  6458 2 485 15 58 4
    • Stocker les nombres dans la pile a.  
 
 2. Gestion des piles  
@@ -127,11 +95,11 @@ Voici un plan succinct :
 
 int main(int argc, char **argv)
 {
-    // 1. Parsing
-    // 2. Initialiser et remplir la pile a
-    // 3. Appeler la logique de tri
-    // 4. Afficher les instructions
-    return (0);
+	// 1. Parsing
+	// 2. Initialiser et remplir la pile a
+	// 3. Appeler la logique de tri
+	// 4. Afficher les instructions
+	return (0);
 }
 ```
 
@@ -141,12 +109,12 @@ int main(int argc, char **argv)
 
 void sa(t_stack *a)
 {
-    // Échanger les deux premiers éléments de la pile a
+	// Échanger les deux premiers éléments de la pile a
 }
 
 void pb(t_stack *a, t_stack *b)
 {
-    // Déplacer le premier élément de a vers b
+	// Déplacer le premier élément de a vers b
 }
 ```
 
@@ -156,7 +124,7 @@ void pb(t_stack *a, t_stack *b)
 
 void sort_stack(t_stack *a, t_stack *b)
 {
-    // Choisir un algorithme de tri performant
-    // Générer les instructions
+	// Choisir un algorithme de tri performant
+	// Générer les instructions
 }
 ```*/

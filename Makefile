@@ -5,86 +5,46 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/11 14:45:26 by mjzlak            #+#    #+#              #
-#    Updated: 2024/11/24 20:00:05 by mloeffer         ###   ########.fr        #
+#    Created: 2025/01/16 08:27:01 by mjzlak            #+#    #+#              #
+#    Updated: 2025/01/16 11:30:59 by mloeffer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = push_swap
+
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I. -include libft.h
+CFLAGS = -Wall -Wextra -Werror
 
-SRC = ft_isalpha.c \
-	ft_isdigit.c \
-	ft_isalnum.c \
-	ft_isascii.c \
-	ft_isprint.c \
-	ft_strlen.c \
-	ft_strlcat.c \
-	ft_toupper.c \
-	ft_tolower.c \
-	ft_bzero.c \
-	ft_memset.c \
-	ft_memcpy.c \
-	ft_memmove.c \
-	ft_strlcpy.c \
-	ft_strchr.c \
-	ft_strrchr.c \
-	ft_strncmp.c \
-	ft_strnstr.c \
-	ft_strncmp.c \
-	ft_memcmp.c \
-	ft_memchr.c \
-	ft_calloc.c \
-	ft_strdup.c \
-	ft_atoi.c \
-	ft_substr.c \
-	ft_strjoin.c \
-	ft_strtrim.c \
-	ft_itoa.c \
-	ft_strmapi.c \
-	ft_striteri.c \
-	ft_split.c \
-	ft_putchar_fd.c \
-	ft_putstr_fd.c \
-	ft_putendl_fd.c \
-	ft_putnbr_fd.c
+SRCS = main.c \
+       operations.c \
+	   ft_split_to_list.c
 
-BONUS_SRC = ft_lstnew_bonus.c \
-	ft_lstadd_front_bonus.c \
-	ft_lstsize_bonus.c \
-	ft_lstlast_bonus.c \
-	ft_lstadd_back_bonus.c \
-	ft_lstdelone_bonus.c \
-	ft_lstclear_bonus.c \
-	ft_lstiter_bonus.c \
-	ft_lstmap_bonus.c
+OBJS = $(SRCS:.c=.o)
 
-BONUS_OBJ = $(BONUS_SRC:.c=.o)
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
-OBJ = $(SRC:.c=.o)
+.PHONY : all
+all: $(LIBFT) $(NAME)
 
-NAME = libft.a
+$(LIBFT):
+	make bonus -C $(LIBFT_DIR)
 
-.PHONY: all
-all: $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
-$(NAME): $(OBJ)
-	ar rcs $@ $^
+%.o: %.c
+	$(CC) $(CFLAGS) -I. -I$(LIBFT_DIR) -c $< -o $@
 
-%.o: %.c Makefile libft.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
-.PHONY: bonus
-bonus: $(OBJ) $(BONUS_OBJ)
-	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
-
-.PHONY: clean 
+.PHONY : clean
 clean:
-	rm -f $(OBJ) $(BONUS_OBJ)
+	rm -f $(OBJS)
+	make -C $(LIBFT_DIR) clean
 
-.PHONY: fclean
+.PHONY : fclean
 fclean: clean
 	rm -f $(NAME)
+	make -C $(LIBFT_DIR) fclean
 
-.PHONY: fclean
+.PHONY : re
 re: fclean all

@@ -1,27 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_split_to_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 14:45:42 by mloeffer          #+#    #+#             */
-/*   Updated: 2024/11/21 17:57:50 by mloeffer         ###   ########.fr       */
+/*   Created: 2025/01/16 10:46:22 by mloeffer          #+#    #+#             */
+/*   Updated: 2025/01/16 11:08:40 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "push_swap.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+static void	free_array(char **array)
 {
-	unsigned char	*buf;
-	size_t			i;
+	size_t	i;
 
-	if (n == 0)
-		return (s);
-	buf = (unsigned char *)s;
 	i = 0;
-	while (i < n)
-		buf[i++] = (unsigned char)c;
-	return (s);
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+void	ft_split_to_list(char *str, char c, t_list *a)
+{
+	char	**array;
+	int		i;
+	int		*value;
+
+	array = ft_split(str, c);
+	i = 0;
+	value = NULL;
+	while (array[i])
+	{
+		*value = ft_atoi(array[i]);
+		ft_lstadd_front(&a, ft_lstnew(value));
+		i++;
+	}
+	free_array(array);
 }

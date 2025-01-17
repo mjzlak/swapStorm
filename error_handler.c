@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:19:49 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/16 13:29:54 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/17 09:46:16 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_is_only_digits_for_one_arg(int argc, char **argv)
 	return (0);
 }
 
-static int  check_is_only_digits_for_multiple_arg(int ac, char **av)
+static int	check_is_only_digits_for_multiple_arg(int ac, char **av)
 {
 	int	j;
 
@@ -56,31 +56,55 @@ static int  check_is_only_digits_for_multiple_arg(int ac, char **av)
 	return (0);
 }
 
-static int	check_no_duplicated_for_one_arg(char **argv)
+static int	check_duplicate_for_one_arg(char *arg, int count, int i, int *nums)
 {
-	int	j;
+	char	**tokens;
+	int		j;
 
-	j = 0;
-	j = ft_atoi(&argv[1][ft_strlen(argv[1]) - 1]);
-	printf("%d\n", j);
-	while (j)
+	tokens = ft_split(arg, ' ');
+	while (tokens[count])
+		count++;
+	nums = malloc(sizeof(int) * count);
+	if (!nums)
+		return (-1);
+	while (++i < count)
+		nums[i] = ft_atoi(tokens[i]);
+	i = -1;
+	while (++i < count - 1)
 	{
-		if (j == ft_atoi(&argv[1][ft_strlen(argv[1]) - 1]))
-			return (-1);
-		j--;
+		j = i;
+		while (++j < count)
+		{
+			if (nums[i] == nums[j])
+			{
+				free_array(tokens);
+				return (-1);
+			}
+		}
 	}
+	free_array(tokens);
 	return (0);
 }
 
 int	error_handler(int argc, char **argv)
 {
+	int	count;
+	int	i;
+	int	*nums;
+
+	count = 0;
+	i = -1;
+	nums = NULL;
 	if (argc < 2)
 		return (-1);
 	if (check_is_only_digits_for_one_arg(argc, argv) == -1)
 		return (-1);
 	if (check_is_only_digits_for_multiple_arg(argc, argv) == -1)
 		return (-1);
-	if (check_no_duplicated_for_one_arg(argv) == -1)
+	if (check_duplicate_for_one_arg(argv[1], count, i, nums) == -1)
+	{
+		free(nums);
 		return (-1);
+	}
 	return (0);
 }

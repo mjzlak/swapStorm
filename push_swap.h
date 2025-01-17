@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:15:35 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/16 13:23:52 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/17 09:39:07 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 // operations.c
 
 // ft_split_to_list.c
+void	free_array(char **array);
 void	ft_split_to_list(char *str, char c, t_list *a);
 
 // error_handler.c

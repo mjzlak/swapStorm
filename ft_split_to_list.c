@@ -6,13 +6,13 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:46:22 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/16 11:08:40 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/17 09:38:53 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	free_array(char **array)
+void	free_array(char **array)
 {
 	size_t	i;
 

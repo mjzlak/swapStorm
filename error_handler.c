@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:19:49 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/17 09:46:16 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:30:14 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ static int	check_is_only_digits_for_one_arg(int argc, char **argv)
 	{
 		while (argv[1][j])
 		{
-			if (!ft_isdigit(argv[1][j]) && argv[1][j] != ' '
-			&& (argv[1][j] >= 9 && argv[1][j] <= 13 && argv[1][j] != '-'))
-				return (-1);
+			while (argv[1][j] == ' ' || (argv[1][j] >= 9 && argv[1][j] <= 13))
+				j++;
 			if (argv[1][j] == '-' && !ft_isdigit(argv[1][j + 1]))
 				return (-1);
+			else if (argv[1][j] != '-' && !ft_isdigit(argv[1][j + 1]))
+				return (-1);
+			else if ((argv[1][j] == '-'
+				&& ft_isdigit(argv[1][j + 1])) || ft_isdigit(argv[1][j]))
+				j++;
 			j++;
 		}
 	}
@@ -95,15 +99,16 @@ int	error_handler(int argc, char **argv)
 	count = 0;
 	i = -1;
 	nums = NULL;
-	if (argc < 2)
+	if ((argc < 2) || (check_is_only_digits_for_one_arg(argc, argv) == -1)
+		|| (check_is_only_digits_for_multiple_arg(argc, argv) == -1))
+	{
+		write(2, "Error\n", 6);
 		return (-1);
-	if (check_is_only_digits_for_one_arg(argc, argv) == -1)
-		return (-1);
-	if (check_is_only_digits_for_multiple_arg(argc, argv) == -1)
-		return (-1);
+	}
 	if (check_duplicate_for_one_arg(argv[1], count, i, nums) == -1)
 	{
 		free(nums);
+		write(2, "Error\n", 6);
 		return (-1);
 	}
 	return (0);

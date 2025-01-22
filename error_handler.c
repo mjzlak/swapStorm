@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:19:49 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/17 15:10:58 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/22 09:40:36 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,30 @@ static int	arg_has_only_digits(int ac, char **av)
 
 static int	arg_has_no_duplicate(int ac, char **av)
 {
-	int	i;
-	int tmp;
+    int		i;
+    int		j;
+    int		tmp;
 
-	i = 0;
-	ac = ac - 1;
-	while (ac > 1)
-	{
-		tmp = ft_atoi(av[ac]);
-		while (i <= ac)
-		{
-			if (tmp == ft_atoi(av[i]))
-				return (-1);
-			i++;
-		}
-		ac--;
-	}
-	return (0);
+    i = 1;
+    while (i < ac)
+    {
+        tmp = ft_atoi(av[i]);
+        j = i + 1;
+        while (j < ac)
+        {
+            if (tmp == ft_atoi(av[j]))
+                return (-1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
 }
 
-int	error_handler(int argc, char **argv)
+int	error_handler(int ac, char **av)
 {
-	if ((argc < 2) || (arg_has_only_digits(argc, argv) == -1))
-	{
-		write(2, "Error\n", 6);
-		return (-1);
-	}
-	if (arg_has_no_duplicate(argc, argv) == -1)
+	if ((ac < 2) || (arg_has_only_digits(ac, av) == -1)
+		|| (arg_has_no_duplicate(ac, av) == -1))
 	{
 		write(2, "Error\n", 6);
 		return (-1);

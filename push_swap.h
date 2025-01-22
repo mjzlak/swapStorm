@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:15:35 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/17 10:40:24 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:28:27 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_array(char **array);
 void	ft_split_to_list(char *str, char c, t_list *a);
 
 // error_handler.c
-int		error_handler(int argc, char **argv);
+int		error_handler(char **array, int size, int ac, char **av);
 
 // main.c
 int		push_swap(int argc, char **argv);

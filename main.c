@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/22 09:41:15 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:28:54 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ int	push_swap(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	if (error_handler(argc, argv) == -1)
+	char	**array;
+	int		size;
+
+	array = NULL;
+	size = 0;
+	if (error_handler(array, size, argc, argv) == -1)
 		return (-1);
 	return (0);
 }

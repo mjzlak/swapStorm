@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/22 12:36:19 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:56:55 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	if (argc == 2)
-		ft_split_to_list(argv[1], ' ', &a);
+	{
+		if (ft_split_to_list(argv[1], ' ', &a) == -1)
+			return (-1);
+	}
 	else
 	{
 		if (init_list(a, b, argc, argv) == -1)

@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:46:22 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/22 12:23:35 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:55:16 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_array(char **array)
 	free(array);
 }
 
-void	ft_split_to_list(char *str, char c, t_list **a)
+int	ft_split_to_list(char *str, char c, t_list **a)
 {
 	char	**array;
 	int		i;
@@ -40,11 +40,12 @@ void	ft_split_to_list(char *str, char c, t_list **a)
 		{
 			free_array(array);
 			ft_lstclear(a, free);
-			return ;
+			return (-1);
 		}
 		*value = ft_atoi(array[i]);
 		ft_lstadd_back(a, ft_lstnew(value));
 		i++;
 	}
 	free_array(array);
+	return (0);
 }

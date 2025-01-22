@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:19:49 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/22 10:31:31 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:28:33 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	error_handler(char **array, int size, int ac, char **av)
 	else
 	{
 		array = av;
-		if ((arg_has_no_duplicate(1, ac, av) == -1) || ac < 2)
+		if ((arg_has_no_duplicate(1, ac, av) == -1) || ac < 2
+			|| arg_has_only_digits(ac, av))
 		{
 			write(2, "Error\n", 6);
 			return (-1);

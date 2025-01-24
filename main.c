@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/24 11:40:02 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:47:39 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,15 @@ void	print_list(t_list *a)
 
 int	push_swap(t_list *a, t_list *b)
 {
-	int	values[];
+	int	values[5];
 	int	i;
 	int	*value_ptr;
 
-	values = {1, 2, 3, 4, 5};
+	values[0] = 1;
+	values[1] = 2;
+	values[2] = 3;
+	values[3] = 4;
+	values[4] = 5;
 	i = 0;
 	while (i < 5)
 	{

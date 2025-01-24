@@ -1,25 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:38:36 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/22 14:06:29 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:35:41 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-// Échanger les deux premiers éléments de la pile a
+static void	ft_lstswap(t_list *old, t_list *new)
+{
+	void	*tmp;
+
+	tmp = old->content;
+	old->content = new->content;
+	new->content = tmp;
+}
+
+// Swap the first two elements of the stack a
 void	sa(t_list *a)
 {
 	if (ft_lstsize(a) < 2)
 		return ;
+	ft_lstswap(a, a->next);
 }
 
-// Déplacer le premier élément de a vers b
-/*void	pb(t_list *a, t_list *b)
+// Swap the first two elements of the stack b
+void	sb(t_list *b)
 {
-}*/
+	if (ft_lstsize(b) < 2)
+		return ;
+	ft_lstswap(b, b->next);
+}
+
+// Swap the first two elements of the stack a and b
+void	ss(t_list *a, t_list *b)
+{
+	sa(a);
+	sb(b);
+}

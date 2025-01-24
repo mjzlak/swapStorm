@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/22 13:56:55 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:40:02 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,94 @@ void	print_list(t_list *a)
 
 int	push_swap(t_list *a, t_list *b)
 {
+	int	values[];
+	int	i;
+	int	*value_ptr;
+
+	values = {1, 2, 3, 4, 5};
+	i = 0;
+	while (i < 5)
+	{
+		*value_ptr = malloc(sizeof(int));
+		if (!value_ptr)
+		{
+			ft_lstclear(&b, free);
+			return (-1);
+		}
+		*value_ptr = values[i];
+		ft_lstadd_back(&b, ft_lstnew(value_ptr));
+		i++;
+	}
 	printf("list a\n");
 	print_list(a);
 	printf("list b\n");
 	print_list(b);
-	(void)b;
+	printf("\nsa\n\n");
+	sa(a);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\nsb\n\n");
+	sb(b);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\nss\n\n");
+	ss(a, b);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\npa\n\n");
+	pa(&a, &b);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\npb\n\n");
+	pb(&a, &b);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\nra\n\n");
+	ra(&a);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\nrb\n\n");
+	rb(&b);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\nrr\n\n");
+	rr(&a, &b);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\nrra\n\n");
+	rra(&a);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\nrrb\n\n");
+	rrb(&b);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
+	printf("\n\nrrr\n\n");
+	rrr(&a, &b);
+	printf("list a\n");
+	print_list(a);
+	printf("list b\n");
+	print_list(b);
 	return (0);
 }
 

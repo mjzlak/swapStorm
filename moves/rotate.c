@@ -1,0 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 08:56:52 by mloeffer          #+#    #+#             */
+/*   Updated: 2025/01/24 11:36:09 by mloeffer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../push_swap.h"
+
+// Shift up all elements of stack a by 1.
+// The last element becomes the first one.
+void	ra(t_list **a)
+{
+	t_list	*tmp;
+	t_list	*last;
+
+	if (!*a || ft_lstsize(*a) < 2)
+		return ;
+	tmp = *a;
+	*a = (*a)->next;
+	last = tmp;
+	last = ft_lstlast(last);
+	last->next = tmp;
+	tmp->next = NULL;
+}
+
+// Shift up all elements of stack b by 1.
+// The first element becomes the last one.
+void	rb(t_list **b)
+{
+	t_list	*tmp;
+	t_list	*last;
+
+	if (!*b || ft_lstsize(*b) < 2)
+		return ;
+	tmp = *b;
+	*b = (*b)->next;
+	last = tmp;
+	last = ft_lstlast(last);
+	last->next = tmp;
+	tmp->next = NULL;
+}
+
+// ra and rb at the same time.
+void	rr(t_list **a, t_list **b)
+{
+	ra(a);
+	rb(b);
+}

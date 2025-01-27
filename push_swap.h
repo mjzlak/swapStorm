@@ -38,7 +38,6 @@ int		ft_split_to_list(char *str, char c, t_list **a);
 int		error_handler(char **array, int size, int ac, char **av);
 
 // main.c
-int		push_swap(t_list *a, t_list *b);
 int		main(int argc, char **argv);
 
 #endif

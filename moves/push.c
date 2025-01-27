@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+#include <unistd.h>
 
 // Take the first element at the top of b and
 // put it at the top of a. Do nothing if b is empty.
@@ -24,6 +25,7 @@ void	pa(t_list **a, t_list **b)
 	*b = (*b)->next;
 	tmp->next = *a;
 	*a = tmp;
+	write(1, "pa", 2);
 }
 
 // Push the first element of the stack and
@@ -38,4 +40,5 @@ void	pb(t_list **a, t_list **b)
 	*a = (*a)->next;
 	tmp->next = *b;
 	*b = tmp;
+	write(1, "pb", 2);
 }

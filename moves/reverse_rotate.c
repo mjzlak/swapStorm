@@ -31,6 +31,7 @@ void	rra(t_list **a)
 	before_last->next = NULL;
 	last->next = *a;
 	*a = last;
+	write(1, "rra", 3);
 }
 
 // Shift down all elements of stack b by 1.
@@ -52,11 +53,35 @@ void	rrb(t_list **b)
 	before_last->next = NULL;
 	last->next = *b;
 	*b = last;
+	write(1, "rrb", 3);
 }
 
 // rra and rrb at the same time.
 void	rrr(t_list **a, t_list **b)
 {
-	rra(a);
-	rrb(b);
+	t_list	*last_a;
+	t_list	*last_b;
+	t_list	*before_last;
+
+	if (!*a || !(*a)->next || !*b || !(*b)->next)
+		return ;
+	last_a = *a;
+	last_b = *b;
+	before_last = NULL;
+	while (last_a->next)
+	{
+		before_last = last_a;
+		last_a = last_a->next;
+	}
+	last_a->next = *a;
+	*a = last_a;
+	while (last_b->next)
+	{
+		before_last = last_b;
+		last_b = last_b->next;
+	}
+	before_last->next = NULL;
+	last_b->next = *b;
+	*b = last_b;
+	write(1, "rrr", 3);
 }

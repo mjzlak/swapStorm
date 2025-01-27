@@ -27,6 +27,7 @@ void	ra(t_list **a)
 	last = ft_lstlast(last);
 	last->next = tmp;
 	tmp->next = NULL;
+	write(1, "ra", 2);
 }
 
 // Shift up all elements of stack b by 1.
@@ -44,11 +45,28 @@ void	rb(t_list **b)
 	last = ft_lstlast(last);
 	last->next = tmp;
 	tmp->next = NULL;
+	write(1, "rb", 2);
 }
 
 // ra and rb at the same time.
 void	rr(t_list **a, t_list **b)
 {
-	ra(a);
-	rb(b);
+	t_list	*tmp;
+	t_list	*last;
+
+	if (!*a || ft_lstsize(*a) < 2 || !*b || ft_lstsize(*b) < 2)
+		return ;
+	tmp = *a;
+	*a = (*a)->next;
+	last = tmp;
+	last = ft_lstlast(last);
+	last->next = tmp;
+	tmp->next = NULL;
+	tmp = *b;
+	*b = (*b)->next;
+	last = tmp;
+	last = ft_lstlast(last);
+	last->next = tmp;
+	tmp->next = NULL;
+	write(1, "rr", 2);
 }

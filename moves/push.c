@@ -25,7 +25,7 @@ void	pa(t_list **a, t_list **b)
 	*b = (*b)->next;
 	tmp->next = *a;
 	*a = tmp;
-	write(1, "pa", 2);
+	write(1, "pa\n", 3);
 }
 
 // Push the first element of the stack and
@@ -40,5 +40,5 @@ void	pb(t_list **a, t_list **b)
 	*a = (*a)->next;
 	tmp->next = *b;
 	*b = tmp;
-	write(1, "pb", 2);
+	write(1, "pb\n", 3);
 }

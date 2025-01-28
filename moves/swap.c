@@ -27,7 +27,7 @@ void	sa(t_list *a)
 	if (ft_lstsize(a) < 2)
 		return ;
 	ft_lstswap(a, a->next);
-	write(1, "sa", 2);
+	write(1, "sa\n", 3);
 }
 
 // Swap the first two elements of the stack b
@@ -36,7 +36,7 @@ void	sb(t_list *b)
 	if (ft_lstsize(b) < 2)
 		return ;
 	ft_lstswap(b, b->next);
-	write(1, "sb", 2);
+	write(1, "sb\n", 3);
 }
 
 // Swap the first two elements of the stack a and b
@@ -46,5 +46,5 @@ void	ss(t_list *a, t_list *b)
 		return ;
 	ft_lstswap(a, a->next);
 	ft_lstswap(b, b->next);
-	write(1, "ss", 2);
+	write(1, "ss\n", 3);
 }

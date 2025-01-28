@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/27 13:59:49 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:53:14 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	small_sort_three(t_list **a)
 	else if (val1 > val2 && val2 > val3)
 	{
 		sa(*a);
-		write(1, " ", 1);
 		rra(a);
 	}
 	else if (val1 > val2 && val2 < val3 && val1 > val3)
@@ -49,11 +48,34 @@ static void	small_sort_three(t_list **a)
 	else if (val1 < val2 && val2 > val3 && val1 < val3)
 	{
 		sa(*a);
-		write(1, " ", 1);
 		ra(a);
 	}
 	else if (val1 < val2 && val2 > val3 && val1 > val3)
 		rra(a);
+}
+
+static void	small_sort(t_list **a, t_list **b, int size)
+{
+	if (size == 4)
+	{
+		pb(a, b);
+		small_sort_three(a);
+		pa(a, b);
+	}
+	else if (size == 5)
+	{
+		pb(a, b);
+		pb(a, b);
+		if (*(int *)(*b)->content > *(int *)(*b)->next->content)
+			sb(*b);
+		small_sort_three(a);
+		if (*(int *)(*a)->content > *(int *)(*a)->next->content)
+			sa(*a);
+		pa(a, b);
+		if (*(int *)(*a)->content > *(int *)(*a)->next->content)
+			sa(*a);
+		pa(a, b);
+	}
 }
 
 static int	push_swap(t_list *a, t_list *b)
@@ -66,12 +88,12 @@ static int	push_swap(t_list *a, t_list *b)
 		return (0);
 	if (size == 2 && (*(int *)a->content > *(int *)a->next->content))
 		sa(a);
-	else if (size == 3)
+	if (size == 3)
 		small_sort_three(&a);
-/*	else if (size <= 5)
+	else if (size > 3 && size <= 5)
 		small_sort(&a, &b, size);
-	else
-		radix_sort(&a, &b, size);*/
+/*	else
+	turkish_sort(&a, &b, size);*/
 	return (0);
 }
 

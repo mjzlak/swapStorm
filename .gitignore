@@ -1,3 +1,4 @@
 .vscode/
 sheet.c
 test_*
+checker_linux

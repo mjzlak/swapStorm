@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 // moves
 void	sa(t_list *a);
@@ -29,6 +29,11 @@ void	rr(t_list **a, t_list **b);
 void	rra(t_list **a);
 void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);
+
+//sort.c
+void	small_sort_three(t_list **a);
+void	small_sort(t_list **a, t_list **b, int size);
+void	turk_sort(t_list **a, t_list **b, int size);
 
 // ft_split_to_list.c
 void	free_array(char **array);

@@ -16,8 +16,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = main.c \
-	   error_handler.c \
-	   ft_split_to_list.c \
+	   utils/error_handler.c \
+	   utils/ft_split_to_list.c \
+	   utils/sort.c \
 	   moves/swap.c \
 	   moves/push.c \
 	   moves/rotate.c \

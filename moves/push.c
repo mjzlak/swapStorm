@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
-#include <unistd.h>
+#include "../include/push_swap.h"
 
 // Take the first element at the top of b and
 // put it at the top of a. Do nothing if b is empty.

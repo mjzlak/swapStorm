@@ -6,26 +6,22 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/28 13:53:14 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:32:13 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/push_swap.h"
 
-/*static void	print_list(t_list *a)
+int	is_sorted(t_list *a)
 {
-	int		i;
-	t_list	*tmp;
-
-	i = 0;
-	tmp = a;
-	while (tmp)
+	while (a && a->next)
 	{
-		printf("\n[%d] = %d\n", i, *(int *)tmp->content);
-		tmp = tmp->next;
-		i++;
+		if (*(int *)a->content > *(int *)a->next->content)
+			return (0);
+		a = a->next;
 	}
-}*/
+	return (1);
+}
 
 static int	push_swap(t_list *a, t_list *b)
 {
@@ -42,11 +38,11 @@ static int	push_swap(t_list *a, t_list *b)
 	else if (size > 3 && size <= 5)
 		small_sort(&a, &b, size);
 	else
-		turk_sort(&a, &b, size);
+		big_sort(&a, &b, size);
 	return (0);
 }
 
-static int	init_list(t_list *a, t_list *b, int argc, char **argv)
+static int	init_list(t_list **a, int argc, char **argv)
 {
 	int	value;
 	int	*value_ptr;
@@ -58,13 +54,12 @@ static int	init_list(t_list *a, t_list *b, int argc, char **argv)
 		value_ptr = malloc(sizeof(int));
 		if (!value_ptr)
 		{
-			ft_lstclear(&a, free);
+			ft_lstclear(a, free);
 			return (-1);
 		}
 		*value_ptr = value;
-		ft_lstadd_front(&a, ft_lstnew(value_ptr));
+		ft_lstadd_front(a, ft_lstnew(value_ptr));
 	}
-	push_swap(a, b);
 	return (0);
 }
 
@@ -78,15 +73,12 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	if (argc == 2)
-	{
 		if (ft_split_to_list(argv[1], ' ', &a) == -1)
 			return (-1);
-	}
-	else
-	{
-		if (init_list(a, b, argc, argv) == -1)
-			return (-1);
-	}
+	if (init_list(&a, argc, argv) == -1)
+		return (-1);
+	while (!is_sorted(a))
+		push_swap(a, b);
 	ft_lstclear(&a, free);
 	return (0);
 }

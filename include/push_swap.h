@@ -31,10 +31,9 @@ void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);
 
 //sort.c
-int		is_sorted(t_list *a);
 void	small_sort_three(t_list **a);
 void	small_sort(t_list **a, t_list **b, int size);
-void	big_sort(t_list **a, t_list **b, int size);
+void	big_sort(t_list **a, t_list **b);
 
 // ft_split_to_list.c
 void	free_array(char **array);

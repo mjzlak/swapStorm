@@ -39,77 +39,54 @@ void	small_sort_three(t_list **a)
 		rra(a);
 }
 
-void	small_sort(t_list **a, t_list **b, int size)
+static int	find_min_value(t_list *a)
 {
-	if (size == 4)
-	{
-		pb(a, b);
-		small_sort_three(a);
-		pa(a, b);
-	}
-	else if (size == 5)
-	{
-		pb(a, b);
-		pb(a, b);
-		if (*(int *)(*b)->content > *(int *)(*b)->next->content)
-			sb(*b);
-		small_sort_three(a);
-		if (*(int *)(*a)->content > *(int *)(*a)->next->content)
-			sa(*a);
-		pa(a, b);
-		if (*(int *)(*a)->content > *(int *)(*a)->next->content)
-			sa(*a);
-		pa(a, b);
-	}
-}
+	int		min;
+	t_list	*tmp = a;
 
-/*static t_list	*ft_lstsecondlast(t_list *lst)
-{
-	if (!lst || !lst->next)
-		return (NULL);
-	while (lst->next->next)
-		lst = lst->next;
-	return (lst);
-}*/
-
-static void	print_list(t_list *a)
-{
-	int		i;
-	t_list	*tmp;
-
-	i = 0;
-	tmp = a;
+	min = *(int *)a->content;
 	while (tmp)
 	{
-		printf("[%d] = %d\n", i, *(int *)tmp->content);
+		if (*(int *)tmp->content < min)
+			min = *(int *)tmp->content;
 		tmp = tmp->next;
-		i++;
 	}
+	return (min);
 }
 
-void	big_sort(t_list **a, t_list **b, int size)
+static int	find_index_of_min(t_list *a, int min_value)
 {
-	int	i;
+	int		index;
+	t_list	*tmp = a;
 
-	i = 0;
-	while ((*a) && i < size)
+	index = 0;
+	while (tmp)
 	{
-		pb(a, b);
-		i++;
-		if (*b && (*b)->next)
-		{
-			if ((*b)->next && (*b)->next->next && *(int *)(*b)->content
-				< *(int *)(*b)->next->content && *(int *)(*b)->content
-				< *(int *)(*b)->next->next->content)
-				rb(b);
-			else if ((*b)->next && (*b)->next->next && *(int *)(*b)->content
-					< *(int *)(*b)->next->content && *(int *)(*b)->content
-					> *(int *)(*b)->next->next->content)
-				sb(*b);
-		}
+		if (*(int *)tmp->content == min_value)
+			return (index);
+		tmp = tmp->next;
+		index++;
 	}
-	__builtin_printf("(*b)->content : %i\n\n", *(int *)(*b)->content);
-	while ((*b))
+	return (-1);
+}
+
+void	big_sort(t_list **a, t_list **b)
+{
+	int	min_value;
+	int	index;
+
+	while (ft_lstsize(*a) > 0)
+	{
+		min_value = find_min_value(*a);
+		if (find_index_of_min(*a, min_value))
+			index = find_index_of_min(*a, min_value);
+		while (index > 0)
+		{
+			ra(a);
+			index--;
+		}
+		pb(a, b);
+	}
+	while (ft_lstsize(*b) > 0)
 		pa(a, b);
-	print_list(*a);
 }

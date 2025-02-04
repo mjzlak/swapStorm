@@ -6,13 +6,13 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/02/03 11:32:13 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:51:18 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/push_swap.h"
 
-int	is_sorted(t_list *a)
+static int	is_sorted(t_list *a)
 {
 	while (a && a->next)
 	{
@@ -23,22 +23,21 @@ int	is_sorted(t_list *a)
 	return (1);
 }
 
-static int	push_swap(t_list *a, t_list *b)
+static int	push_swap(t_list **a, t_list **b)
 {
 	int	size;
 
-	(void)b;
-	size = ft_lstsize(a);
+	size = ft_lstsize(*a);
+	if (is_sorted(*a))
+		return (0);
 	if (size == 1)
 		return (0);
-	if (size == 2 && (*(int *)a->content > *(int *)a->next->content))
-		sa(a);
-	if (size == 3)
-		small_sort_three(&a);
-	else if (size > 3 && size <= 5)
-		small_sort(&a, &b, size);
+	if (size == 2 && (*(int *)(*a)->content > *(int *)(*a)->next->content))
+		sa(*a);
+	else if (size == 3)
+		small_sort_three(a);
 	else
-		big_sort(&a, &b, size);
+		big_sort(a, b);
 	return (0);
 }
 
@@ -77,8 +76,7 @@ int	main(int argc, char **argv)
 			return (-1);
 	if (init_list(&a, argc, argv) == -1)
 		return (-1);
-	while (!is_sorted(a))
-		push_swap(a, b);
+	push_swap(&a, &b);
 	ft_lstclear(&a, free);
 	return (0);
 }

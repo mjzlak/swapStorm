@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:56:52 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/24 11:36:09 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:08:34 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	ra(t_list **a)
 		return ;
 	tmp = *a;
 	*a = (*a)->next;
-	last = tmp;
-	last = ft_lstlast(last);
+	last = ft_lstlast(*a);
 	last->next = tmp;
 	tmp->next = NULL;
 	write(1, "ra\n", 3);
@@ -41,8 +40,7 @@ void	rb(t_list **b)
 		return ;
 	tmp = *b;
 	*b = (*b)->next;
-	last = tmp;
-	last = ft_lstlast(last);
+	last = ft_lstlast(*b);
 	last->next = tmp;
 	tmp->next = NULL;
 	write(1, "rb\n", 3);

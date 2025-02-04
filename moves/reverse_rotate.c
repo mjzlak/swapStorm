@@ -28,7 +28,8 @@ void	rra(t_list **a)
 		before_last = last;
 		last = last->next;
 	}
-	before_last->next = NULL;
+	if (before_last)
+		before_last->next = NULL;
 	last->next = *a;
 	*a = last;
 	write(1, "rra\n", 4);
@@ -50,7 +51,8 @@ void	rrb(t_list **b)
 		before_last = last;
 		last = last->next;
 	}
-	before_last->next = NULL;
+	if (before_last)
+		before_last->next = NULL;
 	last->next = *b;
 	*b = last;
 	write(1, "rrb\n", 4);
@@ -67,7 +69,6 @@ void	rrr(t_list **a, t_list **b)
 		return ;
 	last_a = *a;
 	last_b = *b;
-	before_last = NULL;
 	while (last_a->next)
 	{
 		before_last = last_a;
@@ -80,7 +81,8 @@ void	rrr(t_list **a, t_list **b)
 		before_last = last_b;
 		last_b = last_b->next;
 	}
-	before_last->next = NULL;
+	if (before_last)
+		before_last->next = NULL;
 	last_b->next = *b;
 	*b = last_b;
 	write(1, "rrr\n", 4);

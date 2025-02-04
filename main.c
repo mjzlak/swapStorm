@@ -36,6 +36,8 @@ static int	push_swap(t_list **a, t_list **b)
 		sa(*a);
 	else if (size == 3)
 		small_sort_three(a);
+	else if (size > 3 && size < 6)
+		small_sort(a, b, size);
 	else
 		big_sort(a, b);
 	return (0);

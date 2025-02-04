@@ -39,11 +39,34 @@ void	small_sort_three(t_list **a)
 		rra(a);
 }
 
+void	small_sort(t_list **a, t_list **b, int size)
+{
+	if (size == 4)
+	{
+		pb(a, b);
+		small_sort_three(a);
+		pa(a, b);
+	}
+	else if (size == 5)
+	{
+		pb(a, b);
+		pb(a, b);
+		small_sort_three(a);
+		pa(a, b);
+		if (*(int *)(*a)->content > *(int *)(*a)->next->next->next->content)
+			ra(a);
+		pa(a, b);
+		if (*(int *)(*a)->content > *(int *)(*a)->next->next->next->content)
+			ra(a);
+	}
+}
+
 static int	find_min_value(t_list *a)
 {
 	int		min;
-	t_list	*tmp = a;
+	t_list	*tmp;
 
+	tmp = a;
 	min = *(int *)a->content;
 	while (tmp)
 	{
@@ -57,8 +80,11 @@ static int	find_min_value(t_list *a)
 static int	find_index_of_min(t_list *a, int min_value)
 {
 	int		index;
-	t_list	*tmp = a;
+	t_list	*tmp;
 
+	if (!a)
+		return (-1);
+	tmp = a;
 	index = 0;
 	while (tmp)
 	{
@@ -70,21 +96,35 @@ static int	find_index_of_min(t_list *a, int min_value)
 	return (-1);
 }
 
+static void	reverse_or_rotate(t_list **a, int mid, int index)
+{
+	int	buf;
+
+	if (index > mid)
+	{
+		buf = ft_lstsize(*a) - index;
+		while (buf-- > 0)
+			rra(a);
+	}
+	else
+	{
+		while (index-- > 0)
+			ra(a);
+	}
+}
+
 void	big_sort(t_list **a, t_list **b)
 {
 	int	min_value;
 	int	index;
+	int	mid;
 
 	while (ft_lstsize(*a) > 0)
 	{
 		min_value = find_min_value(*a);
-		if (find_index_of_min(*a, min_value))
-			index = find_index_of_min(*a, min_value);
-		while (index > 0)
-		{
-			ra(a);
-			index--;
-		}
+		index = find_index_of_min(*a, min_value);
+		mid = ft_lstsize(*a) / 2;
+		reverse_or_rotate(a, mid, index);
 		pb(a, b);
 	}
 	while (ft_lstsize(*b) > 0)

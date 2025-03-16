@@ -6,21 +6,21 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:44:31 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/02/03 08:58:33 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:55:58 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	small_sort_three(t_list **a)
+void	small_sort_three(t_lst **a)
 {
 	int	val1;
 	int	val2;
 	int	val3;
 
-	val1 = *(int *)(*a)->content;
-	val2 = *(int *)(*a)->next->content;
-	val3 = *(int *)(*a)->next->next->content;
+	val1 = (*a)->content;
+	val2 = (*a)->next->content;
+	val3 = (*a)->next->next->content;
 	if (val1 > val2 && val2 < val3 && val1 < val3)
 		sa(*a);
 	else if (val1 > val2 && val2 > val3)
@@ -39,7 +39,7 @@ void	small_sort_three(t_list **a)
 		rra(a);
 }
 
-void	small_sort(t_list **a, t_list **b, int size)
+void	small_sort(t_lst **a, t_lst **b, int size)
 {
 	if (size == 4)
 	{
@@ -53,18 +53,23 @@ void	small_sort(t_list **a, t_list **b, int size)
 		pb(a, b);
 		small_sort_three(a);
 		pa(a, b);
-		if (*(int *)(*a)->content > *(int *)(*a)->next->next->next->content)
+		if ((*a)->content > (*a)->next->next->next->content)
 			ra(a);
 		pa(a, b);
-		if (*(int *)(*a)->content > *(int *)(*a)->next->next->next->content)
+		if ((*a)->content > (*a)->next->next->next->content)
 			ra(a);
 	}
 }
 
-static int	find_min_value(t_list *a)
+/*static void 	universal_sort(t_lst **a, t_lst **b, int size)
+{
+
+}*/
+
+/*static int	find_min_value(t_lst *a)
 {
 	int		min;
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	tmp = a;
 	min = *(int *)a->content;
@@ -77,10 +82,10 @@ static int	find_min_value(t_list *a)
 	return (min);
 }
 
-static int	find_index_of_min(t_list *a, int min_value)
+static int	find_index_of_min(t_lst *a, int min_value)
 {
 	int		index;
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	if (!a)
 		return (-1);
@@ -96,7 +101,7 @@ static int	find_index_of_min(t_list *a, int min_value)
 	return (-1);
 }
 
-static void	reverse_or_rotate(t_list **a, int mid, int index)
+static void	reverse_or_rotate(t_lst **a, int mid, int index)
 {
 	int	buf;
 
@@ -113,7 +118,7 @@ static void	reverse_or_rotate(t_list **a, int mid, int index)
 	}
 }
 
-void	big_sort(t_list **a, t_list **b)
+void	big_sort(t_lst **a, t_lst **b)
 {
 	int	min_value;
 	int	index;
@@ -129,4 +134,124 @@ void	big_sort(t_list **a, t_list **b)
 	}
 	while (ft_lstsize(*b) > 0)
 		pa(a, b);
+}*/
+
+/*static int	find_max_bits(t_lst *a)
+{
+	int	max;
+	int	bits;
+
+	max = *(int *)a->content;
+	while (a)
+	{
+		if (*(int *)a->content > max)
+			max = *(int *)a->content;
+		a = a->next;
+	}
+	bits = 0;
+	while ((max >> bits) != 0)
+		bits++;
+	return (bits);
+}*/
+
+/*void	big_sort(t_lst **a, t_lst **b, int size)
+{
+	int	max_bits;
+	int	i;
+	int	j;
+
+	size = ft_lstsize(*a);
+	max_bits = find_max_bits(*a);
+
+	i = 0;
+	while (i < max_bits)
+	{
+		j = 0;
+		int initial_size = size; // On garde la taille initiale pour éviter de changer `size` durant la boucle
+		while (j < initial_size) 
+		{
+			if (((*(int *)(*a)->content >> i) & 1) == 0)
+				pb(a, b); // On pousse les 0 dans `b`
+			else
+				ra(a);  // On fait juste avancer les 1
+			j++;
+		}
+		while (*b) 
+			pa(a, b);  // On récupère tous les éléments dans `b` en respectant leur ordre
+		i++;
+	}
+}*/
+
+/*static int	find_max_index(t_lst *b)
+{
+	int		max;
+	int		index;
+	int		max_index;
+	t_lst	*tmp;
+
+	if (!b)
+		return (-1);
+	tmp = b;
+	max = *(int *)b->content;
+	index = 0;
+	max_index = 0;
+	while (tmp)
+	{
+		if (*(int *)tmp->content > max)
+		{
+			max = *(int *)tmp->content;
+			max_index = index;
+		}
+		tmp = tmp->next;
+		index++;
+	}
+	return (max_index);
 }
+
+void	big_sort(t_lst **a, t_lst **b, int size, int max_bits)
+{
+	int	i;
+	int	j;
+	int	initial_size;
+	int	max_index;
+
+	size = ft_lstsize(*a);
+	max_bits = find_max_bits(*a);
+	i = 0;
+	while (i < max_bits)
+	{
+		j = 0;
+		initial_size = size;
+		while (j < initial_size) 
+		{
+			if (((*(int *)(*a)->content >> i) & 1) == 0)
+			{
+				pb(a, b);
+				if (*b && (*b)->next && *(int *)(*b)->content > *(int *)(*b)->next->content)
+					rb(b);
+			}
+			else
+			{
+				if (*b && (*b)->next)
+					rr(a, b);
+				else
+					ra(a);
+			}
+			j++;
+		}
+		while (*b)
+		{
+			max_index = find_max_index(*b);
+			if (max_index < ft_lstsize(*b) / 2)
+				while (max_index-- > 0)
+					rb(b);
+			else
+			{
+				while (max_index++ < ft_lstsize(*b))
+					rrb(b);
+			}
+			pa(a, b);
+		}
+		i++;
+	}
+}*/

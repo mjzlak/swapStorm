@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:58:27 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/27 08:54:20 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:55:00 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 // Shift down all elements of stack a by 1.
 // The last element becomes the first one.
-void	rra(t_list **a)
+void	rra(t_lst **a)
 {
-	t_list	*last;
-	t_list	*before_last;
+	t_lst	*last;
+	t_lst	*before_last;
 
 	if (!*a || !(*a)->next)
 		return ;
@@ -37,10 +37,10 @@ void	rra(t_list **a)
 
 // Shift down all elements of stack b by 1.
 // The first element becomes the last one.
-void	rrb(t_list **b)
+void	rrb(t_lst **b)
 {
-	t_list	*last;
-	t_list	*before_last;
+	t_lst	*last;
+	t_lst	*before_last;
 
 	if (!*b || !(*b)->next)
 		return ;
@@ -59,11 +59,11 @@ void	rrb(t_list **b)
 }
 
 // rra and rrb at the same time.
-void	rrr(t_list **a, t_list **b)
+void	rrr(t_lst **a, t_lst **b)
 {
-	t_list	*last_a;
-	t_list	*last_b;
-	t_list	*before_last;
+	t_lst	*last_a;
+	t_lst	*last_b;
+	t_lst	*before_last;
 
 	if (!*a || !(*a)->next || !*b || !(*b)->next)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:46:22 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/22 13:55:16 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:55:15 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,28 @@ void	free_array(char **array)
 	free(array);
 }
 
-int	ft_split_to_list(char *str, char c, t_list **a)
+int	ft_split_to_list(char *str, char c, t_lst **a)
 {
-	char	**array;
-	int		i;
-	int		*value;
+    char	**array;
+    int		i;
+    int		value;
+    t_lst	*new_node;
 
-	array = ft_split(str, c);
-	i = 0;
-	while (array[i])
-	{
-		value = malloc(sizeof(int));
-		if (!value)
-		{
-			free_array(array);
-			ft_lstclear(a, free);
-			return (-1);
-		}
-		*value = ft_atoi(array[i]);
-		ft_lstadd_back(a, ft_lstnew(value));
-		i++;
-	}
-	free_array(array);
-	return (0);
+    array = ft_split(str, c);
+    i = 0;
+    while (array[i])
+    {
+        value = ft_atoi(array[i]);
+        new_node = ft_lstnew(value);
+        if (!new_node)
+        {
+            free_array(array);
+            ft_lstclear(a);
+            return (-1);
+        }
+        ft_lstadd_back(a, new_node);
+        i++;
+    }
+    free_array(array);
+    return (0);
 }

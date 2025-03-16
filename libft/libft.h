@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:45:46 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/16 10:21:28 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:15:30 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 // Bonus functions
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **alst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **alst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list	*ft_listnew(void *content);
+void	ft_listadd_front(t_list **alst, t_list *new);
+int		ft_listsize(t_list *lst);
+t_list	*ft_listlast(t_list *lst);
+void	ft_listadd_back(t_list **alst, t_list *new);
+void	ft_listdelone(t_list *lst, void (*del)(void*));
+void	ft_listclear(t_list **lst, void (*del)(void*));
+void	ft_listiter(t_list *lst, void (*f)(void *));
+t_list	*ft_listmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

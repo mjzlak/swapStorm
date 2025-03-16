@@ -6,15 +6,15 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:38:36 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/01/24 11:35:41 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:55:10 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-static void	ft_lstswap(t_list *old, t_list *new)
+static void	ft_lstswap(t_lst *old, t_lst *new)
 {
-	void	*tmp;
+	int	tmp;
 
 	tmp = old->content;
 	old->content = new->content;
@@ -22,7 +22,7 @@ static void	ft_lstswap(t_list *old, t_list *new)
 }
 
 // Swap the first two elements of the stack a
-void	sa(t_list *a)
+void	sa(t_lst *a)
 {
 	if (ft_lstsize(a) < 2)
 		return ;
@@ -31,7 +31,7 @@ void	sa(t_list *a)
 }
 
 // Swap the first two elements of the stack b
-void	sb(t_list *b)
+void	sb(t_lst *b)
 {
 	if (ft_lstsize(b) < 2)
 		return ;
@@ -40,7 +40,7 @@ void	sb(t_list *b)
 }
 
 // Swap the first two elements of the stack a and b
-void	ss(t_list *a, t_list *b)
+void	ss(t_lst *a, t_lst *b)
 {
 	if (ft_lstsize(a) < 2 || ft_lstsize(b) < 2)
 		return ;

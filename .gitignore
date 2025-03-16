@@ -2,4 +2,6 @@
 sheet.c
 test_*
 checker_linux
-push_swap_visualizer/*
+push_swap_*
+*.pdf
+*.ini

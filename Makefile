@@ -6,7 +6,7 @@
 #    By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 08:27:01 by mjzlak            #+#    #+#              #
-#    Updated: 2025/01/24 10:24:09 by mloeffer         ###   ########.fr        #
+#    Updated: 2025/03/16 22:55:33 by mloeffer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = main.c \
 	   utils/error_handler.c \
 	   utils/ft_split_to_list.c \
 	   utils/sort.c \
+	   utils/lst_utils.c \
 	   moves/swap.c \
 	   moves/push.c \
 	   moves/rotate.c \

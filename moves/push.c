@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:54:58 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/24 11:37:00 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:54:53 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // Take the first element at the top of b and
 // put it at the top of a. Do nothing if b is empty.
-void	pa(t_list **a, t_list **b)
+void	pa(t_lst **a, t_lst **b)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	if (!*b)
 		return ;
@@ -29,9 +29,9 @@ void	pa(t_list **a, t_list **b)
 
 // Push the first element of the stack and
 // to the top of the stack b
-void	pb(t_list **a, t_list **b)
+void	pb(t_lst **a, t_lst **b)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	if (!*a)
 		return ;

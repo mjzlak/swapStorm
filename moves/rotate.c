@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:56:52 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/02/03 12:08:34 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:55:05 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 // Shift up all elements of stack a by 1.
 // The last element becomes the first one.
-void	ra(t_list **a)
+void	ra(t_lst **a)
 {
-	t_list	*tmp;
-	t_list	*last;
+	t_lst	*tmp;
+	t_lst	*last;
 
 	if (!*a || ft_lstsize(*a) < 2)
 		return ;
@@ -31,10 +31,10 @@ void	ra(t_list **a)
 
 // Shift up all elements of stack b by 1.
 // The first element becomes the last one.
-void	rb(t_list **b)
+void	rb(t_lst **b)
 {
-	t_list	*tmp;
-	t_list	*last;
+	t_lst	*tmp;
+	t_lst	*last;
 
 	if (!*b || ft_lstsize(*b) < 2)
 		return ;
@@ -47,10 +47,10 @@ void	rb(t_list **b)
 }
 
 // ra and rb at the same time.
-void	rr(t_list **a, t_list **b)
+void	rr(t_lst **a, t_lst **b)
 {
-	t_list	*tmp;
-	t_list	*last;
+	t_lst	*tmp;
+	t_lst	*last;
 
 	if (!*a || ft_lstsize(*a) < 2 || !*b || ft_lstsize(*b) < 2)
 		return ;

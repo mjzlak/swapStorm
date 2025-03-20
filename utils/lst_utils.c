@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 22:21:45 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/16 22:50:09 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/20 02:57:55 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ t_lst	*ft_lstnew(int content)
     if (!new)
         return (NULL);
     new->content = content;
-    new->cost = 0;    // Initialiser les nouveaux champs
-    new->target = 0;  // Initialiser les nouveaux champs
+    new->cost = 0;
+    new->target = 0;
     new->next = NULL;
     return (new);
 }
@@ -94,6 +94,17 @@ void	ft_lstdelone(t_lst *lst)
 {
     if (!lst)
         return ;
-    // Ne pas libérer lst->content car c'est maintenant un int stocké directement
     free(lst);
+}
+
+void free_list(t_lst *lst)
+{
+    t_lst *tmp;
+
+    while (lst)
+    {
+        tmp = lst;
+        lst = lst->next;
+        free(tmp);
+    }
 }

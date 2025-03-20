@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:44:31 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/16 22:55:58 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/20 04:23:20 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,60 @@ void	small_sort(t_lst **a, t_lst **b, int size)
 			ra(a);
 	}
 }
-
-/*static void 	universal_sort(t_lst **a, t_lst **b, int size)
+static void	print_lst(t_lst *lst)
 {
+	printf("-------------------------------------------------------\nList:\n");
+	while (lst)
+	{
+		printf("content : %d\n", lst->content);
+		printf("cost : %d\n", lst->cost);
+		printf("target : %d\n", lst->target);
+		lst = lst->next;
+	}
+	printf("-------------------------------------------------------\n");
+}
 
-}*/
+static int	update_target_and_cost(t_lst **a, t_lst **b, int size)
+{
+    t_lst	*tmp;
+
+    tmp = *a;
+    while (tmp)
+    {
+        tmp->target = get_target(*b, tmp->content);
+        tmp->cost = get_cost(*b, tmp->target);
+        if (tmp->cost == -1)
+        {
+            printf("Error: Target %d not found in list\n", tmp->target);
+            print_lst(*a);
+            return (print_and_return_error("Error: Invalid cost calculation\n", -1));
+        }
+        if (tmp->cost > size / 2)
+            rrb(b);
+        else
+            rb(b);
+		pb(a, b);
+        tmp = tmp->next;
+    }
+	print_lst(tmp);
+    return (0);
+}
+
+int	universal_sort(t_lst **a, t_lst **b, int size)
+{
+	if (!a || !*a)
+		return (-1);
+	pb(a, b);
+	pb(a, b);
+	if (update_target_and_cost(a, b, size) == -1)
+		return (-1);
+	print_lst(*b);
+	while (*b)
+		pa(a, b);
+	print_lst(*a);
+	return (0);
+}
+
 
 /*static int	find_min_value(t_lst *a)
 {

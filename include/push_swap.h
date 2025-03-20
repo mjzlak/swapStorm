@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:15:35 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/16 22:54:48 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/20 03:49:41 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,23 @@ size_t	ft_lstsize(t_lst *lst);
 void	ft_lstclear(t_lst **lst);
 t_lst	*ft_lstnew(int content);
 void	ft_lstdelone(t_lst *lst);
+void	free_list(t_lst *lst);
 
 //sort.c
 void	small_sort_three(t_lst **a);
 void	small_sort(t_lst **a, t_lst **b, int size);
-void	big_sort(t_lst **a, t_lst **b, int size, int max_bits);
+int 	universal_sort(t_lst **a, t_lst **b, int size);
+
+// sort_utils.c
+int		get_cost(t_lst *lst, int target);
+int		get_target(t_lst *b, int elem);
 
 // ft_split_to_list.c
 void	free_array(char **array);
 int		ft_split_to_list(char *str, char c, t_lst **a);
 
 // error_handler.c
+int		print_and_return_error(char *message, int return_value);
 int		error_handler(char **array, int size, int ac, char **av);
 
 // main.c

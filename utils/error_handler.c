@@ -6,11 +6,17 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:19:49 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/01/22 12:28:33 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/20 02:58:27 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+
+int	print_and_return_error(char *message, int return_value)
+{
+	write(2, message, ft_strlen(message));
+	return (return_value);
+}
 
 static int	arg_has_only_digits(int ac, char **av)
 {

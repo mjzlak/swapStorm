@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/16 22:55:30 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/20 03:01:41 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static int	push_swap(t_lst **a, t_lst **b)
 		small_sort_three(a);
 	else if (size > 3 && size < 6)
 		small_sort(a, b, size);
-	//else
-		//big_sort(a, b, size, 0);
+	else
+		universal_sort(a, b, size);
 	return (0);
 }
 
@@ -60,25 +60,26 @@ static int	init_list(t_lst **a, int argc, char **argv)
 		}
 		*value_ptr = value;
 		ft_lstadd_front(a, ft_lstnew(*value_ptr));
+		free(value_ptr);
 	}
+	ft_lstadd_back(a, NULL);
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_lst	*a;
-	t_lst	*b;
+    t_lst *a = NULL;
+    t_lst *b = NULL;
 
-	if (error_handler(NULL, 0, argc, argv) == -1)
-		return (-1);
-	a = NULL;
-	b = NULL;
-	if (argc == 2)
-		if (ft_split_to_list(argv[1], ' ', &a) == -1)
-			return (-1);
-	if (init_list(&a, argc, argv) == -1)
-		return (-1);
-	push_swap(&a, &b);
-	ft_lstclear(&a);
-	return (0);
+    if (error_handler(NULL, 0, argc, argv) == -1)
+        return (-1);
+    if (argc == 2)
+        if (ft_split_to_list(argv[1], ' ', &a) == -1)
+            return (-1);
+    if (init_list(&a, argc, argv) == -1)
+        return (-1);
+    push_swap(&a, &b);
+    free_list(a);
+    free_list(b);
+    return (0);
 }

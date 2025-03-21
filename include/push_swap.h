@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:15:35 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/20 03:49:41 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/21 20:45:26 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ void	free_list(t_lst *lst);
 //sort.c
 void	small_sort_three(t_lst **a);
 void	small_sort(t_lst **a, t_lst **b, int size);
-int 	universal_sort(t_lst **a, t_lst **b, int size);
+int 	universal_sort(t_lst **a, t_lst **b, int size, int pos);
 
-// sort_utils.c
+// cost_calculator.c
 int		get_cost(t_lst *lst, int target);
 int		get_target(t_lst *b, int elem);
+int		get_maximum(t_lst *lst);
+int		get_minimum(t_lst *lst);
 
 // ft_split_to_list.c
 void	free_array(char **array);

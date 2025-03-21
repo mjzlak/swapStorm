@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:44:31 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/20 04:23:20 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/21 19:51:46mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,247 +60,64 @@ void	small_sort(t_lst **a, t_lst **b, int size)
 			ra(a);
 	}
 }
-static void	print_lst(t_lst *lst)
+static void	print_lst(t_lst *lst, char *name)
 {
-	printf("-------------------------------------------------------\nList:\n");
+	printf("-------------------------------------------------------\nList %s:\n", name);
 	while (lst)
 	{
 		printf("content : %d\n", lst->content);
-		printf("cost : %d\n", lst->cost);
-		printf("target : %d\n", lst->target);
+		/*printf("cost : %d\n", lst->cost);
+		printf("target : %d\n", lst->target);*/
 		lst = lst->next;
 	}
 	printf("-------------------------------------------------------\n");
 }
 
-static int	update_target_and_cost(t_lst **a, t_lst **b, int size)
+int	universal_sort(t_lst **a, t_lst **b, int size, int pos)
 {
+	int		target;
+	int		cost;
+	int		min_pos;
     t_lst	*tmp;
 
-    tmp = *a;
+	//print_lst(*a, "a before sort three");
+    while (ft_lstsize(*a) > 3)
+        pb(a, b);
+    small_sort_three(a);
+	//print_lst(*a, "a after sort three");
+    while (*b)
+    {
+        target = get_target(*a, (*b)->content);
+        cost = get_cost(*a, target);
+        if (cost == -1)
+            return (print_and_return_error("Error: Invalid cost calculation\n", -1));
+        size = ft_lstsize(*a);
+        pos = cost;
+        if (pos <= size / 2)
+            while (pos-- > 0)
+                ra(a);
+        else
+            while (pos++ < size)
+                rra(a);
+        pa(a, b);
+    }
+	//print_lst(*a, "a after insertion");
+    min_pos = 0;
+	tmp = *a;
     while (tmp)
     {
-        tmp->target = get_target(*b, tmp->content);
-        tmp->cost = get_cost(*b, tmp->target);
-        if (tmp->cost == -1)
-        {
-            printf("Error: Target %d not found in list\n", tmp->target);
-            print_lst(*a);
-            return (print_and_return_error("Error: Invalid cost calculation\n", -1));
-        }
-        if (tmp->cost > size / 2)
-            rrb(b);
-        else
-            rb(b);
-		pb(a, b);
+        if (tmp->content == get_minimum(*a))
+            break;
+        min_pos++;
         tmp = tmp->next;
     }
-	print_lst(tmp);
+    size = ft_lstsize(*a);
+    if (min_pos <= size / 2)
+        while (min_pos-- > 0)
+            ra(a);
+    else
+        while (min_pos++ < size)
+            rra(a);
+	print_lst(*a, "a after final alignment");
     return (0);
 }
-
-int	universal_sort(t_lst **a, t_lst **b, int size)
-{
-	if (!a || !*a)
-		return (-1);
-	pb(a, b);
-	pb(a, b);
-	if (update_target_and_cost(a, b, size) == -1)
-		return (-1);
-	print_lst(*b);
-	while (*b)
-		pa(a, b);
-	print_lst(*a);
-	return (0);
-}
-
-
-/*static int	find_min_value(t_lst *a)
-{
-	int		min;
-	t_lst	*tmp;
-
-	tmp = a;
-	min = *(int *)a->content;
-	while (tmp)
-	{
-		if (*(int *)tmp->content < min)
-			min = *(int *)tmp->content;
-		tmp = tmp->next;
-	}
-	return (min);
-}
-
-static int	find_index_of_min(t_lst *a, int min_value)
-{
-	int		index;
-	t_lst	*tmp;
-
-	if (!a)
-		return (-1);
-	tmp = a;
-	index = 0;
-	while (tmp)
-	{
-		if (*(int *)tmp->content == min_value)
-			return (index);
-		tmp = tmp->next;
-		index++;
-	}
-	return (-1);
-}
-
-static void	reverse_or_rotate(t_lst **a, int mid, int index)
-{
-	int	buf;
-
-	if (index > mid)
-	{
-		buf = ft_lstsize(*a) - index;
-		while (buf-- > 0)
-			rra(a);
-	}
-	else
-	{
-		while (index-- > 0)
-			ra(a);
-	}
-}
-
-void	big_sort(t_lst **a, t_lst **b)
-{
-	int	min_value;
-	int	index;
-	int	mid;
-
-	while (ft_lstsize(*a) > 0)
-	{
-		min_value = find_min_value(*a);
-		index = find_index_of_min(*a, min_value);
-		mid = ft_lstsize(*a) / 2;
-		reverse_or_rotate(a, mid, index);
-		pb(a, b);
-	}
-	while (ft_lstsize(*b) > 0)
-		pa(a, b);
-}*/
-
-/*static int	find_max_bits(t_lst *a)
-{
-	int	max;
-	int	bits;
-
-	max = *(int *)a->content;
-	while (a)
-	{
-		if (*(int *)a->content > max)
-			max = *(int *)a->content;
-		a = a->next;
-	}
-	bits = 0;
-	while ((max >> bits) != 0)
-		bits++;
-	return (bits);
-}*/
-
-/*void	big_sort(t_lst **a, t_lst **b, int size)
-{
-	int	max_bits;
-	int	i;
-	int	j;
-
-	size = ft_lstsize(*a);
-	max_bits = find_max_bits(*a);
-
-	i = 0;
-	while (i < max_bits)
-	{
-		j = 0;
-		int initial_size = size; // On garde la taille initiale pour éviter de changer `size` durant la boucle
-		while (j < initial_size) 
-		{
-			if (((*(int *)(*a)->content >> i) & 1) == 0)
-				pb(a, b); // On pousse les 0 dans `b`
-			else
-				ra(a);  // On fait juste avancer les 1
-			j++;
-		}
-		while (*b) 
-			pa(a, b);  // On récupère tous les éléments dans `b` en respectant leur ordre
-		i++;
-	}
-}*/
-
-/*static int	find_max_index(t_lst *b)
-{
-	int		max;
-	int		index;
-	int		max_index;
-	t_lst	*tmp;
-
-	if (!b)
-		return (-1);
-	tmp = b;
-	max = *(int *)b->content;
-	index = 0;
-	max_index = 0;
-	while (tmp)
-	{
-		if (*(int *)tmp->content > max)
-		{
-			max = *(int *)tmp->content;
-			max_index = index;
-		}
-		tmp = tmp->next;
-		index++;
-	}
-	return (max_index);
-}
-
-void	big_sort(t_lst **a, t_lst **b, int size, int max_bits)
-{
-	int	i;
-	int	j;
-	int	initial_size;
-	int	max_index;
-
-	size = ft_lstsize(*a);
-	max_bits = find_max_bits(*a);
-	i = 0;
-	while (i < max_bits)
-	{
-		j = 0;
-		initial_size = size;
-		while (j < initial_size) 
-		{
-			if (((*(int *)(*a)->content >> i) & 1) == 0)
-			{
-				pb(a, b);
-				if (*b && (*b)->next && *(int *)(*b)->content > *(int *)(*b)->next->content)
-					rb(b);
-			}
-			else
-			{
-				if (*b && (*b)->next)
-					rr(a, b);
-				else
-					ra(a);
-			}
-			j++;
-		}
-		while (*b)
-		{
-			max_index = find_max_index(*b);
-			if (max_index < ft_lstsize(*b) / 2)
-				while (max_index-- > 0)
-					rb(b);
-			else
-			{
-				while (max_index++ < ft_lstsize(*b))
-					rrb(b);
-			}
-			pa(a, b);
-		}
-		i++;
-	}
-}*/

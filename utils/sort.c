@@ -18,21 +18,21 @@ void	small_sort_three(t_lst **a)
 	int	val2;
 	int	val3;
 
-	val1 = (*a)->content;
-	val2 = (*a)->next->content;
-	val3 = (*a)->next->next->content;
+	val1 = (*a)->head;
+	val2 = (*a)->next->head;
+	val3 = (*a)->next->next->head;
 	if (val1 > val2 && val2 < val3 && val1 < val3)
-		sa(*a);
+		sa(a);
 	else if (val1 > val2 && val2 > val3)
 	{
-		sa(*a);
+		sa(a);
 		rra(a);
 	}
 	else if (val1 > val2 && val2 < val3 && val1 > val3)
 		ra(a);
 	else if (val1 < val2 && val2 > val3 && val1 < val3)
 	{
-		sa(*a);
+		sa(a);
 		ra(a);
 	}
 	else if (val1 < val2 && val2 > val3 && val1 > val3)
@@ -53,10 +53,10 @@ void	small_sort(t_lst **a, t_lst **b, int size)
 		pb(a, b);
 		small_sort_three(a);
 		pa(a, b);
-		if ((*a)->content > (*a)->next->next->next->content)
+		if ((*a)->head > (*a)->next->next->next->head)
 			ra(a);
 		pa(a, b);
-		if ((*a)->content > (*a)->next->next->next->content)
+		if ((*a)->head > (*a)->next->next->next->head)
 			ra(a);
 	}
 }
@@ -65,7 +65,7 @@ static void	print_lst(t_lst *lst, char *name)
 	printf("-------------------------------------------------------\nList %s:\n", name);
 	while (lst)
 	{
-		printf("content : %d\n", lst->content);
+		printf("content : %d\n", lst->head);
 		/*printf("cost : %d\n", lst->cost);
 		printf("target : %d\n", lst->target);*/
 		lst = lst->next;
@@ -73,51 +73,32 @@ static void	print_lst(t_lst *lst, char *name)
 	printf("-------------------------------------------------------\n");
 }
 
-int	universal_sort(t_lst **a, t_lst **b, int size, int pos)
+int	universal_sort(t_lst **a, t_lst **b)
 {
-	int		target;
-	int		cost;
-	int		min_pos;
-    t_lst	*tmp;
+	int	min;
 
-	//print_lst(*a, "a before sort three");
-    while (ft_lstsize(*a) > 3)
-        pb(a, b);
-    small_sort_three(a);
-	//print_lst(*a, "a after sort three");
-    while (*b)
-    {
-        target = get_target(*a, (*b)->content);
-        cost = get_cost(*a, target);
-        if (cost == -1)
-            return (print_and_return_error("Error: Invalid cost calculation\n", -1));
-        size = ft_lstsize(*a);
-        pos = cost;
-        if (pos <= size / 2)
-            while (pos-- > 0)
-                ra(a);
-        else
-            while (pos++ < size)
-                rra(a);
-        pa(a, b);
-    }
-	//print_lst(*a, "a after insertion");
-    min_pos = 0;
-	tmp = *a;
-    while (tmp)
-    {
-        if (tmp->content == get_minimum(*a))
-            break;
-        min_pos++;
-        tmp = tmp->next;
-    }
-    size = ft_lstsize(*a);
-    if (min_pos <= size / 2)
-        while (min_pos-- > 0)
-            ra(a);
-    else
-        while (min_pos++ < size)
-            rra(a);
-	print_lst(*a, "a after final alignment");
-    return (0);
+	min = get_minimum(*a);
+	while (ft_lstsize(*a) > 3)
+		pb(a, b);
+	small_sort_three(a);
+	print_lst(*a, "a before\n");
+	while ((*a)->next)
+	{
+		fill_target(*a, *b);
+		printf("filled target\n");
+		fill_costs(*a, *b);
+		printf("filled costs\n");
+		move_the_cheapest(*a, *b);
+		printf("moved the cheapest\n");
+	}
+	print_lst(*a, "a after fill and move\n");
+	while (*b)
+		pa(a, b);
+	while ((*a)->head != min)
+		if (get_direction(*a, min))
+			ra(a);
+		else
+			rra(a);
+	print_lst(*a, "a after final alignment\n");
+	return (0);
 }

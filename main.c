@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/21 20:45:33 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:43:09 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	is_sorted(t_lst *a)
 {
 	while (a && a->next)
 	{
-		if (a->content > a->next->content)
+		if (a->head > a->next->head)
 			return (0);
 		a = a->next;
 	}
@@ -32,14 +32,14 @@ static int	push_swap(t_lst **a, t_lst **b)
 		return (0);
 	if (size == 1)
 		return (0);
-	if (size == 2 && (*a)->content > (*a)->next->content)
-		sa(*a);
+	if (size == 2 && (*a)->head > (*a)->next->head)
+		sa(a);
 	else if (size == 3)
 		small_sort_three(a);
 	else if (size > 3 && size < 6)
 		small_sort(a, b, size);
 	else
-		universal_sort(a, b, size, 0);
+		universal_sort(a, b);
 	return (0);
 }
 
@@ -62,7 +62,7 @@ static int	init_list(t_lst **a, int argc, char **argv)
 		ft_lstadd_front(a, ft_lstnew(*value_ptr));
 		free(value_ptr);
 	}
-	ft_lstadd_back(a, NULL);
+	//ft_lstadd_back(a, NULL);
 	return (0);
 }
 

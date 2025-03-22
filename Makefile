@@ -6,20 +6,21 @@
 #    By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 08:27:01 by mjzlak            #+#    #+#              #
-#    Updated: 2025/03/21 19:47:01 by mloeffer         ###   ########.fr        #
+#    Updated: 2025/03/22 14:30:32 by mloeffer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = main.c \
 	   utils/error_handler.c \
 	   utils/ft_split_to_list.c \
 	   utils/sort.c \
 	   utils/cost_calculator.c \
+	   utils/do_and_move.c \
 	   utils/lst_utils.c \
 	   moves/swap.c \
 	   moves/push.c \

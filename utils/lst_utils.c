@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 22:21:45 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/20 02:57:55 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:19:27 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_lst	*ft_lstnew(int content)
     new = malloc(sizeof(t_lst));
     if (!new)
         return (NULL);
-    new->content = content;
+    new->head = content;
     new->cost = 0;
     new->target = 0;
     new->next = NULL;

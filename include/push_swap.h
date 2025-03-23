@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:15:35 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/22 14:30:02 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:20:19 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,33 @@ void	rrb(t_lst **b);
 void	rrr(t_lst **a, t_lst **b);
 
 // lst_utils.c
-void	ft_lstadd_back(t_lst **lst, t_lst *new);
-void	ft_lstadd_front(t_lst **lst, t_lst *new);
 t_lst	*ft_lstlast(t_lst *lst);
 size_t	ft_lstsize(t_lst *lst);
 void	ft_lstclear(t_lst **lst);
-t_lst	*ft_lstnew(int content);
 void	ft_lstdelone(t_lst *lst);
 void	free_list(t_lst *lst);
+
+// lst_init.c
+void	ft_lstadd_back(t_lst **lst, t_lst *new);
+void	ft_lstadd_front(t_lst **lst, t_lst *new);
+t_lst	*ft_lstnew(int content);
 
 //sort.c
 void	small_sort_three(t_lst **a);
 void	small_sort(t_lst **a, t_lst **b, int size);
-int 	universal_sort(t_lst **a, t_lst **b);
+int		universal_sort(t_lst **a, t_lst **b);
 
 // cost_calculator.c
 int		get_cost(int elem, int target, t_lst *a, t_lst *b);
-int		get_target(t_lst *b, int elem);
+int		get_target(t_lst **b, int elem);
 int		get_maximum(t_lst *lst);
 int		get_minimum(t_lst *lst);
 int		get_cheapest_move(t_lst *a);
 
 // do_and_move.c
 void	fill_costs(t_lst *a, t_lst *b);
-void	fill_target(t_lst *a, t_lst *b);
-void	move_the_cheapest(t_lst *a, t_lst *b);
+void	fill_target(t_lst **a, t_lst **b);
+void	move_the_cheapest(t_lst **a, t_lst **b);
 int		get_direction(t_lst *lst, int elem);
 
 // ft_split_to_list.c

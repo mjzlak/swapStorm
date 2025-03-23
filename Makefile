@@ -6,7 +6,7 @@
 #    By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 08:27:01 by mjzlak            #+#    #+#              #
-#    Updated: 2025/03/22 14:30:32 by mloeffer         ###   ########.fr        #
+#    Updated: 2025/03/23 21:15:23 by mloeffer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = main.c \
 	   utils/cost_calculator.c \
 	   utils/do_and_move.c \
 	   utils/lst_utils.c \
+	   utils/lst_init.c \
 	   moves/swap.c \
 	   moves/push.c \
 	   moves/rotate.c \

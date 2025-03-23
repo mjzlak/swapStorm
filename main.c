@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/22 14:43:09 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:09:02 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,25 @@ static int	init_list(t_lst **a, int argc, char **argv)
 		ft_lstadd_front(a, ft_lstnew(*value_ptr));
 		free(value_ptr);
 	}
-	//ft_lstadd_back(a, NULL);
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_lst *a = NULL;
-    t_lst *b = NULL;
+	t_lst	*a;
+	t_lst	*b;
 
-    if (error_handler(NULL, 0, argc, argv) == -1)
-        return (-1);
-    if (argc == 2)
-        if (ft_split_to_list(argv[1], ' ', &a) == -1)
-            return (-1);
-    if (init_list(&a, argc, argv) == -1)
-        return (-1);
-    push_swap(&a, &b);
-    free_list(a);
-    free_list(b);
-    return (0);
+	a = NULL;
+	b = NULL;
+	if (error_handler(NULL, 0, argc, argv) == -1)
+		return (-1);
+	if (argc == 2)
+		if (ft_split_to_list(argv[1], ' ', &a) == -1)
+			return (-1);
+	if (init_list(&a, argc, argv) == -1)
+		return (-1);
+	push_swap(&a, &b);
+	free_list(a);
+	free_list(b);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:32 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/22 14:59:43 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:06:03 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,53 +40,56 @@ int	get_minimum(t_lst *lst)
 	return (min);
 }
 
-int	get_target(t_lst *b, int elem)
+int	get_target(t_lst **b, int elem)
 {
 	int		min;
 	int		max;
 	t_lst	*tmp;
 
-	min = get_minimum(b);
-	max = get_maximum(b);
+	min = get_minimum(*b);
+	max = get_maximum(*b);
 	if (elem > max || elem < min)
 		return (max);
-	tmp = b;
-	// with while (tmp && tmp->next) i got infinite loop
-	// with while (tmp->next) i got infinite loop
-	// with while (tmp) i got segfault on get_target, fill_target, universal_sort, push_swap, main
+	tmp = *b;
 	while (tmp)
 	{
-		if (tmp->head > elem && tmp->next->head < elem)
+		if (!tmp->next)
+		{
+			if (tmp->head > elem && (*b)->head < elem)
+				return ((*b)->head);
+		}
+		if (tmp->next && tmp->head > elem && tmp->next->head < elem)
 			return (tmp->next->head);
 		tmp = tmp->next;
 	}
 	return (max);
 }
-//TODO: Implement usage of rra and ra : for now calculating only with ra
-//TODO: Implement usage of rrb and rb : for now calculating only with rb
+
 int	get_cost(int elem, int target, t_lst *a, t_lst *b)
 {
+	int		cost_a;
+	int		cost_b;
 	t_lst	*tmp;
-	int		cost;
-	int		nb_ra;
-	int		nb_rb;
 
+	cost_a = 0;
+	cost_b = 0;
 	tmp = a;
-	cost = 0;
-	while (tmp->head != elem)
+	while (tmp && tmp->head != elem)
 	{
-		cost++;
+		cost_a++;
 		tmp = tmp->next;
 	}
-	nb_ra = cost;
 	tmp = b;
-	while (tmp->head != target)
+	while (tmp && tmp->head != target)
 	{
-		cost++;
+		cost_b++;
 		tmp = tmp->next;
 	}
-	nb_rb = cost;
-	return (cost);
+	if (!get_direction(a, elem))
+		cost_a = ft_lstsize(a) - cost_a;
+	if (!get_direction(b, target))
+		cost_b = ft_lstsize(b) - cost_b;
+	return (cost_a + cost_b);
 }
 
 int	get_cheapest_move(t_lst *a)

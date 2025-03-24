@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:19:49 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/24 18:33:14 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:59:31 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	arg_has_no_duplicate(int i, int ac, char **av)
 int	error_handler(char **array, int size, int ac, char **av)
 {
     if (ac == 1)
-		return (print_and_return_error("Error\n", -1));
+		return (0);
     if (ac == 2)
     {
         array = ft_split(av[1], ' ');

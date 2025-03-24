@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 22:21:45 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/23 21:17:19 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:18:45 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	free_list(t_lst *lst)
 {
 	t_lst	*tmp;
 
+	if (!lst)
+		return ;
 	while (lst)
 	{
 		tmp = lst;

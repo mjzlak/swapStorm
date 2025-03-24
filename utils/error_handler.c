@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:19:49 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/20 02:58:27 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:33:14 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,28 @@ int	print_and_return_error(char *message, int return_value)
 	write(2, message, ft_strlen(message));
 	return (return_value);
 }
-
 static int	arg_has_only_digits(int ac, char **av)
 {
+	int	i;
 	int	j;
 
-	ac = ac - 1;
-	while (ac > 1)
+	i = ac - 1;
+	while (i > 0)
 	{
 		j = 0;
-		while (av[ac][j])
+		while (av[i][j])
 		{
-			if ((av[ac][j] == '-' && ft_isdigit(av[ac][j + 1]))
-				|| ft_isdigit(av[ac][j]))
+			if (av[i][j] == '-' || av[i][j] == '+')
 			{
-				j++;
-				continue ;
+				if (!ft_isdigit(av[i][j + 1]))
+					return (-1);
 			}
-			else if (((av[ac][j] != '-' && !ft_isdigit(av[ac][j + 1]))
-				&& av[ac][j] != ' ' && (av[1][j] >= 9 && av[1][j] <= 13))
-					|| !ft_isdigit(av[ac][j]))
-				return (-1);
-			else if (av[ac][j] == '-' && !ft_isdigit(av[ac][j + 1]))
+			else if (!ft_isdigit(av[i][j]) && av[i][j] != ' '
+				&& (av[i][j] < 9 || av[i][j] > 13))
 				return (-1);
 			j++;
 		}
-		ac--;
+		i--;
 	}
 	return (0);
 }
@@ -69,29 +65,26 @@ static int	arg_has_no_duplicate(int i, int ac, char **av)
 
 int	error_handler(char **array, int size, int ac, char **av)
 {
-	if (ac == 2)
-	{
-		array = ft_split(av[1], ' ');
-		while (array[size])
-			size++;
-		if (arg_has_no_duplicate(0, size, array) == -1
-			|| arg_has_only_digits(size, array) == -1)
-		{
-			free_array(array);
-			write(2, "Error\n", 6);
-			return (-1);
-		}
-		free_array(array);
-	}
-	else
-	{
-		array = av;
-		if ((arg_has_no_duplicate(1, ac, av) == -1) || ac < 2
-			|| arg_has_only_digits(ac, av))
-		{
-			write(2, "Error\n", 6);
-			return (-1);
-		}
-	}
-	return (0);
+    if (ac == 1)
+		return (print_and_return_error("Error\n", -1));
+    if (ac == 2)
+    {
+        array = ft_split(av[1], ' ');
+        if (!array)
+            return (print_and_return_error("Error\n", -1));
+        while (array[size])
+            size++;
+        if (size == 0 || arg_has_no_duplicate(0, size, array) == -1
+            || arg_has_only_digits(size, array) == -1)
+        {
+            free_array(array);
+            return (print_and_return_error("Error\n", -1));
+        }
+        free_array(array);
+        return (0);
+    }
+    if ((arg_has_no_duplicate(1, ac, av) == -1)
+        || arg_has_only_digits(ac, av) == -1 || av[1][0] == '\0')
+        return (print_and_return_error("Error\n", -1));
+    return (0);
 }

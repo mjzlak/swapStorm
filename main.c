@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/25 11:52:49 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:05:02 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	push_swap(t_lst **a, t_lst **b)
 	return (0);
 }
 
-static int	init_list(t_lst **a, int argc, char **argv)
+static int	init_list(t_lst **a, int argc, char **argv, int *is_overflow)
 {
 	int	value;
 	int	*value_ptr;
@@ -51,7 +51,12 @@ static int	init_list(t_lst **a, int argc, char **argv)
 	while (argc > 1)
 	{
 		argc--;
-		value = ft_atoi(argv[argc]);
+		value = ft_atoi(argv[argc], is_overflow);
+		if (*is_overflow)
+		{
+			ft_lstclear(a);
+			return (-1);
+		}
 		value_ptr = malloc(sizeof(int));
 		if (!value_ptr)
 		{
@@ -69,15 +74,17 @@ int	main(int argc, char **argv)
 {
 	t_lst	*a;
 	t_lst	*b;
+	int		is_overflow;
 
 	a = NULL;
 	b = NULL;
+	is_overflow = 0;
 	if (error_handler(NULL, 0, argc, argv) == -1)
 		return (-1);
 	if (argc == 2)
-		if (ft_split_to_list(argv[1], ' ', &a) == -1)
+		if (ft_split_to_list(argv[1], ' ', &a, 0) == -1)
 			return (-1);
-	if (init_list(&a, argc, argv) == -1)
+	if (init_list(&a, argc, argv, &is_overflow) == -1)
 		return (-1);
 	if (a != NULL)
 		push_swap(&a, &b);

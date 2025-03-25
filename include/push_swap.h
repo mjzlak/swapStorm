@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:15:35 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/23 21:20:19 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:56:18 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		get_direction(t_lst *lst, int elem);
 
 // ft_split_to_list.c
 void	free_array(char **array);
-int		ft_split_to_list(char *str, char c, t_lst **a);
+int		ft_split_to_list(char *str, char c, t_lst **a, int i);
 
 // error_handler.c
 int		print_and_return_error(char *message, int return_value);

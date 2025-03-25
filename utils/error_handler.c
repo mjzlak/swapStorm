@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:19:49 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/25 15:35:49 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:54:58 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static int	args_has_only_digits(int ac, char **av, int overflow)
 		{
 			if (av[i][j] == '-' || av[i][j] == '+')
 			{
-				if (av[i][j + 1] == '\0' || !ft_isdigit(av[i][j + 1]))
+				if (!av[i][j + 1] || !ft_isdigit(av[i][j + 1])
+					|| (j > 0 && av[i][j - 1] != ' '))
 					return (-1);
 			}
-			else if (!ft_isdigit(av[i][j]) && av[i][j] != ' '
-				&& (av[i][j] < 9 || av[i][j] > 13))
+			else if (!ft_isdigit(av[i][j]) && !is_skippable(av[i][j]))
 				return (-1);
 			j++;
 		}
@@ -82,11 +82,11 @@ static int	arg_has_only_digits(int ac, char **av, int overflow)
 		{
 			if (av[i][j] == '-' || av[i][j] == '+')
 			{
-				if (av[i][j + 1] == '\0' || !ft_isdigit(av[i][j + 1]))
+				if (!av[i][j + 1] || !ft_isdigit(av[i][j + 1])
+					|| (j > 0 && av[i][j - 1] != ' '))
 					return (-1);
 			}
-			else if (!ft_isdigit(av[i][j]) && av[i][j] != ' '
-				&& (av[i][j] < 9 || av[i][j] > 13))
+			else if (!ft_isdigit(av[i][j]) && !is_skippable(av[i][j]))
 				return (-1);
 			j++;
 		}
@@ -109,10 +109,11 @@ int	error_handler(char **array, int size, int ac, char **av)
 			return (print_and_return_error("Error\n", -1));
 		while (array[size])
 			size++;
-		if (size == 0 || args_has_no_duplicate(0, size, array, 0) == -1
-			|| args_has_only_digits(size, array, 0) == -1
+		if (size == 0
 			|| (size == 1 && arg_has_only_digits(size, array, 0) == -1)
-			|| (size == 1 && args_has_no_duplicate(0, size, array, 0) == -1))
+			|| (size == 1 && args_has_no_duplicate(0, size, array, 0) == -1)
+			|| args_has_no_duplicate(0, size, array, 0) == -1
+			|| arg_has_only_digits(size, array, 0) == -1)
 		{
 			free_array(array);
 			return (print_and_return_error("Error\n", -1));

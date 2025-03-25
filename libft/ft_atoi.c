@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:10:31 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/25 15:35:18 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:07:20 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_char_is_num(char c)
 		return (0);
 }
 
-static int	ft_skippable(char c)
+int	is_skippable(char c)
 {
 	if (c == ' ')
 		return (1);
@@ -39,7 +39,7 @@ int	ft_atoi(const char *str, int *is_overflow)
 	result = 0;
 	sign = 1;
 	*is_overflow = 0;
-	while (ft_skippable(str[i]))
+	while (is_skippable(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 		if (str[i++] == '-')

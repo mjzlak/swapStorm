@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/25 14:05:02 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:54:38 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		if (ft_split_to_list(argv[1], ' ', &a, 0) == -1)
 			return (-1);
-	if (init_list(&a, argc, argv, &is_overflow) == -1)
-		return (-1);
+	if (argc > 2)
+		if (init_list(&a, argc, argv, &is_overflow) == -1)
+			return (-1);
 	if (a != NULL)
 		push_swap(&a, &b);
 	free_list(a);

@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:03:17 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/24 18:18:03 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:52:49 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@ static int	push_swap(t_lst **a, t_lst **b)
 		return (0);
 	if (size == 1)
 		return (0);
-	if (size == 2 && (*a)->head > (*a)->next->head)
+	if (size == 2)
 		sa(a);
 	else if (size == 3)
 		small_sort_three(a);
-	else if (size > 3 && size < 7)
-	{
+	else if (size > 3 && size < 6)
 		small_sort(a, b, size);
-	}
 	else
 		universal_sort(a, b);
 	return (0);

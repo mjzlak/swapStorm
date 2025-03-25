@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:46:22 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/23 21:11:39 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:47:18 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	ft_split_to_list(char *str, char c, t_lst **a)
 	t_lst	*new_node;
 
 	array = ft_split(str, c);
+	if (!array)
+		return (-1);
 	i = 0;
 	while (array[i])
 	{

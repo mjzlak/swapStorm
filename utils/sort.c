@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:44:31 by mloeffer          #+#    #+#             */
-/*   Updated: 2025/03/24 16:55:13 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:10:08 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,48 +41,48 @@ void	small_sort_three(t_lst **a)
 
 static void	small_sort_four(t_lst **a, t_lst **b)
 {
-    int	min;
+	int	min;
 
-    min = get_minimum(*a);
-    while ((*a)->head != min)
-    {
-        if (get_direction(*a, min))
-            ra(a);
-        else
-            rra(a);
-    }
-    pb(a, b);
-    small_sort_three(a);
-    pa(a, b);
+	min = get_minimum(*a);
+	while ((*a)->head != min)
+	{
+		if (get_direction(*a, min))
+			ra(a);
+		else
+			rra(a);
+	}
+	pb(a, b);
+	small_sort_three(a);
+	pa(a, b);
 }
 
 static void	small_sort_five(t_lst **a, t_lst **b)
 {
-    int	min;
+	int	min;
 
-    min = get_minimum(*a);
-    while ((*a)->head != min)
-    {
-        if (get_direction(*a, min))
-            ra(a);
-        else
-            rra(a);
-    }
-    pb(a, b);
-    min = get_minimum(*a);
-    while ((*a)->head != min)
-    {
-        if (get_direction(*a, min))
-            ra(a);
-        else
-            rra(a);
-    }
-    pb(a, b);
-    small_sort_three(a);
-    if ((*b)->next && (*b)->head < (*b)->next->head)
-        sb(b);
-    pa(a, b);
-    pa(a, b);
+	min = get_minimum(*a);
+	while ((*a)->head != min)
+	{
+		if (get_direction(*a, min))
+			ra(a);
+		else
+			rra(a);
+	}
+	pb(a, b);
+	min = get_minimum(*a);
+	while ((*a)->head != min)
+	{
+		if (get_direction(*a, min))
+			ra(a);
+		else
+			rra(a);
+	}
+	pb(a, b);
+	small_sort_three(a);
+	if ((*b)->next && (*b)->head < (*b)->next->head)
+		sb(b);
+	pa(a, b);
+	pa(a, b);
 }
 
 void	small_sort(t_lst **a, t_lst **b, int size)

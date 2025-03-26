@@ -6,7 +6,7 @@
 /*   By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 11:15:35 by mjzlak            #+#    #+#             */
-/*   Updated: 2025/03/25 13:56:18 by mloeffer         ###   ########.fr       */
+/*   Updated: 2025/03/25 20:04:33 by mloeffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_lstadd_back(t_lst **lst, t_lst *new);
 void	ft_lstadd_front(t_lst **lst, t_lst *new);
 t_lst	*ft_lstnew(int content);
 
-//sort.c
+// sort.c
 void	small_sort_three(t_lst **a);
 void	small_sort(t_lst **a, t_lst **b, int size);
 int		universal_sort(t_lst **a, t_lst **b);

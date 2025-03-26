@@ -6,7 +6,7 @@
 #    By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:45:26 by mjzlak            #+#    #+#              #
-#    Updated: 2024/11/24 20:00:05 by mloeffer         ###   ########.fr        #
+#    Updated: 2025/03/26 13:43:04 by mloeffer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ $(NAME): $(OBJ)
 bonus: $(OBJ) $(BONUS_OBJ)
 	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
 
-.PHONY: clean 
+.PHONY: clean
 clean:
 	rm -f $(OBJ) $(BONUS_OBJ)
 
@@ -86,5 +86,5 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-.PHONY: fclean
+.PHONY: re
 re: fclean all

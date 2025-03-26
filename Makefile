@@ -6,7 +6,7 @@
 #    By: mloeffer <mloeffer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 08:27:01 by mjzlak            #+#    #+#              #
-#    Updated: 2025/03/25 11:11:38 by mloeffer         ###   ########.fr        #
+#    Updated: 2025/03/26 13:53:44 by mloeffer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,6 @@ $(NAME): $(OBJS) Makefile
 .PHONY : clean
 clean:
 	rm -f $(OBJS) $(DEPS)
-	make -C $(LIBFT_DIR) clean
 
 .PHONY : fclean
 fclean: clean
